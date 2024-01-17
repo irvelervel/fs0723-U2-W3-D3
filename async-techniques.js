@@ -47,11 +47,11 @@ const countUntilThreeWithPromise = function () {
 
     if (timer > 4000) {
       // troppo!
-      reject()
+      reject('errore di timeout')
     } else {
       setTimeout(() => {
         console.log('conto un intervallo variabile <4s')
-        resolve()
+        resolve('ho ottenuto i dati che volevo')
       }, timer)
     }
   })
@@ -62,15 +62,15 @@ const pageStartWithPromise = function () {
     .then(
       // qua inserisco il codice successivo da eseguire se l'operazione asincrona è finita BENE
       // in pratica qua proseguo il flow una volta che nella Promise è stato chiamato resolve()
-      () => {
-        console.log('FINITO IN 4S O MENO')
+      (data) => {
+        console.log('FINITO IN 4S O MENO', data)
       }
     )
-    .catch(() => {
+    .catch((errMessage) => {
       // qua inserisco il codice successivo da eseguire se l'operazione asincrona è finita MALE
       // in pratica qua proseguo il flow una volta che nella Promise è stato chiamato reject()
 
-      console.log('IL TIMER ERA TROPPO ALTO!')
+      console.log('si è verificato un errore: ', errMessage)
     })
 }
 
